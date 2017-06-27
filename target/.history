@@ -1,0 +1,8 @@
+prinln("hello")
+console
+compile
+test
+run
+quit
+q
+exit

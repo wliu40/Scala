@@ -1,0 +1,13 @@
+object helloworksheet {
+  println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
+  val x = 1                                       //> x  : Int = 1
+  def increase(i: Int) = i + 1                    //> increase: (i: Int)Int
+  increase(x)                                     //> res0: Int = 2
+  print(x)                                        //> 1
+  1+1                                             //> res1: Int(2) = 2
+  def square(x:Double) = x*x                      //> square: (x: Double)Double
+  square(10)                                      //> res2: Double = 100.0
+  2+1
+  square(100)
+  
+}

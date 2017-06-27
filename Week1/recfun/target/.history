@@ -1,0 +1,13 @@
+console
+submit wliu0828@gmail.com QePaoluUBIoqZfwl
+submit wliu0828@gmail.com       money match{
+        case 0 => 1
+        case x if x>0 && coins.isEmpty => 0
+        case x if x<0 => 0
+        case _ => countChange(money - coins.head, coins) + countChange(money, coins.tail)
+      }
+submit wliu0828@gmail.com sWX1lzrF2HBvAAH0
+submit wliu0828@gmail.com import common._
+import collection.immutable.Stack
+submit wliu0828@gmail.com QePaoluUBIoqZfwl
+submit wliu0828@gmail.com jLfZcBu75YIs6Hr1
