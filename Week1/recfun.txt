@@ -1,0 +1,97 @@
+package recfun
+import common._
+import scala.collection.immutable.Stack
+
+/*
+
+Exercise 1: Pascal’s Triangle
+
+The following pattern of numbers is called Pascal’s triangle.
+
+    1
+   1 1
+  1 2 1
+ 1 3 3 1
+1 4 6 4 1
+   ...
+The numbers at the edge of the triangle are all 1, and each number inside the triangle is the sum of the two numbers above it. 
+Write a function that computes the elements of Pascal’s triangle by means of a recursive process.
+
+Do this exercise by implementing the pascal function in Main.scala, which takes a column c and a row r, 
+counting from 0 and returns the number at that spot in the triangle. For example, pascal(0,2)=1,pascal(1,2)=2 and pascal(1,3)=3.
+
+def pascal(c: Int, r: Int): Int
+
+Exercise 2: Parentheses Balancing
+Write a recursive function which verifies the balancing of parentheses in a string, which we represent as a List[Char] not a String. 
+For example, the function should return true for the following strings:
+
+(if (zero? x) max (/ 1 x))
+I told him (that it’s not (yet) done). (But he wasn’t listening)
+The function should return false for the following strings:
+:-)
+())(
+The last example shows that it’s not enough to verify that a string contains the same number of opening and closing parentheses.
+
+Exercise 3: Counting Change
+
+Write a recursive function that counts how many different ways you can make change for an amount, given a list of coin denominations.
+For example, there are 3 ways to give change for 4 if you have coins with denomination 1 and 2: 1+1+1+1, 1+1+2, 2+2.
+
+Do this exercise by implementing the countChange function inMain.scala. This function takes an amount to change, and a list of unique 
+denominations for the coins. Its signature is as follows:
+
+def countChange(money: Int, coins: List[Int]): Int
+
+*/
+
+object Main{
+  def main(args: Array[String]) {
+    println("Pascal's Triangle")
+    for (row <- 0 to 10) {
+      for (col <- 0 to row)
+        print(pascal(col, row) + " ")
+      println()
+    }
+  }
+
+  /**
+   * Exercise 1
+   */
+    def pascal(c: Int, r: Int): Int = {
+      if (c==0 || c ==r) 1
+      else pascal(c-1,r-1)+pascal(c,r-1)
+    }
+  
+  /**
+   * Exercise 2
+   */
+    def balance(chars: List[Char]): Boolean = {
+      def helper(chars:List[Char], mylist: List[Char]):Boolean =
+        if (chars.isEmpty) mylist.isEmpty /*当chars遍历完毕，如果mylist为空，则返回真，否则返回假*/
+        else{
+          chars.head match {
+            case '(' => helper(chars.tail, List('('):::mylist) /*如果遇到'(', 则加入到mylist*/
+            case ')' => if (mylist.contains( '(' ) ) helper(chars.tail, mylist.tail) /* 如果遇到')', 则判断mylist是否有'('， 如果有，mylist pop出首元素*/
+            else false
+            case _ => helper(chars.tail, mylist) /*如果是其他字符，则继续遍历chars, mylist保持不变*/
+          }
+        }
+      val mylist = List() /* 空List */
+      helper(chars, mylist)
+    }
+  
+  /**
+   * Exercise 3
+   */
+    def countChange(money: Int, coins: List[Int]): Int = {
+      money match {
+        case 0 => 1 /* money 为0， 返回真*/
+        case x if x > 0 && coins.isEmpty => 0
+        case x if x < 0 => 0
+        case _ => countChange(money - coins.head, coins) + countChange(money, coins.tail)
+      }
+    }
+
+}
+
